@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isCartOpen: false,
-    cartItems: []
+    cartItems: localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [],
+    cartTotalAmount: 0,
+    cartTotalQantity: 0,
 }
 
 const cart = createSlice({
@@ -13,11 +17,63 @@ const cart = createSlice({
             state.isCartOpen = !state.isCartOpen
         },
         addToCart: (state, action) => {
-            const temp = { ...action.payload, cartQuantity: 1 };
-            state.cartItems.push(temp);
+            const index = state.cartItems.findIndex((i) => i.id === action.payload.id)
+            if (index >= 0) {
+                state.cartItems[index].itemQuantity += 1;
+            }
+            else {
+                const cartItem = { ...action.payload, itemQuantity: 1 };
+                state.cartItems.push(cartItem);
+            }
+            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+        },
+        removeFromCart: (state, action) => {
+            const editedCart = state.cartItems.filter(item => item.id !== action.payload);
+
+            state.cartItems = editedCart;
+            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+        },
+
+        increaseItemQTY: (state, action) => {
+            const index = state.cartItems.findIndex((item) => item.id === action.payload);
+            console.log(index);
+            if (index >= 0) {
+                state.cartItems[index].itemQuantity += 1;
+            }
+            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+        },
+
+        decreaseItemQTY: (state, action) => {
+            const index = state.cartItems.findIndex((item) => item.id === action.payload);
+
+            if (state.cartItems[index].itemQuantity > 1) {
+                state.cartItems[index].itemQuantity -= 1;
+            }
+            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+        },
+        clearAllItems: (state) => {
+            state.cartItems = []
+            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+        },
+        calculateTotal: (state) => {
+            let { totalAmount, totalQTY } = state.cartItems.reduce((cartTotal, cartItem) => {
+                const { price, itemQuantity } = cartItem;
+                const totalPrice = price * itemQuantity;
+
+                cartTotal.totalAmount += totalPrice;
+                cartTotal.totalQTY += itemQuantity;
+
+                return cartTotal;
+            }, {
+                totalAmount: 0,
+                totalQTY: 0,
+            });
+
+            state.cartTotalAmount = totalAmount;
+            state.cartTotalQantity = totalQTY;
         }
     }
 })
 
-export const { toggleCart, addToCart } = cart.actions
+export const { toggleCart, addToCart, removeFromCart, increaseItemQTY, decreaseItemQTY, clearAllItems, calculateTotal } = cart.actions
 export default cart.reducer;
