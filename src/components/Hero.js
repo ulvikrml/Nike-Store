@@ -12,7 +12,7 @@ const Hero = ({ heroapi: { title, subtitle, btntext, img, sociallinks, videos } 
             <h1 className='text-4xl lg:text-6xl md:text-5xl font-extrabold drop-shadow-sm text-slate-200'>{title}</h1>
             <h1 className='text-4xl lg:text-6xl md:text-5xl font-extrabold drop-shadow-sm text-slate-200'>{subtitle}</h1>
             <button type='button' className='button-theme bg-slate-200 shadow-slate-200 rounded-xl my-5'>{btntext}</button>
-            <div className='grid items-center gap-3 md:gap-5 absolute top-[35vh] lg:top-[27vh] left-0 xl:left-[11%] w-auto h-auto'>
+            <div className='grid items-center gap-3 md:gap-5 absolute top-[30vh] lg:top-[33vh] left-0 xl:left-[11%] w-auto h-auto'>
               {videos?.map((val, i) => (
                 <Clips
                   key={i}

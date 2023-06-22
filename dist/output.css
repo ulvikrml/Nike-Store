@@ -919,6 +919,14 @@ body{
   height: 100vh;
 }
 
+.h-40{
+  height: 10rem;
+}
+
+.h-44{
+  height: 11rem;
+}
+
 .w-16{
   width: 4rem;
 }
@@ -1755,6 +1763,10 @@ body{
     height: 65vh;
   }
 
+  .sm\:h-52{
+    height: 13rem;
+  }
+
   .sm\:w-16{
     width: 4rem;
   }
@@ -1822,6 +1834,14 @@ body{
 
   .md\:h-\[75vh\]{
     height: 75vh;
+  }
+
+  .md\:h-56{
+    height: 14rem;
+  }
+
+  .md\:h-64{
+    height: 16rem;
   }
 
   .md\:w-24{
@@ -1924,6 +1944,14 @@ body{
 
   .lg\:h-\[85vh\]{
     height: 85vh;
+  }
+
+  .lg\:h-60{
+    height: 15rem;
+  }
+
+  .lg\:h-72{
+    height: 18rem;
   }
 
   .lg\:w-28{
