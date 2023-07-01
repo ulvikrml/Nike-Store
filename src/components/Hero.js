@@ -1,5 +1,7 @@
 import React from 'react';
 import Clips from './Clips';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const Hero = ({ heroapi: { title, subtitle, btntext, img, sociallinks, videos } }) => {
 
@@ -29,14 +31,27 @@ const Hero = ({ heroapi: { title, subtitle, btntext, img, sociallinks, videos } 
                   alt="icon/social"
                   className="w-8 h-8 flex items-center cursor-pointer md:w-6 md:h-6 sm:w-5 sm:h-5 transition-all duration-200 hover:scale-110"
                 />
+                // <LazyLoadImage
+                //   key={i}
+                //   src={link.icon}
+                //   alt="icon/social"
+                //   className="w-8 h-8 flex items-center cursor-pointer md:w-6 md:h-6 sm:w-5 sm:h-5 transition-all duration-200 hover:scale-110"
+                //   effect="opacity"
+                // />
               ))}
             </div>
           </div>
           <div className='flex items-center'>
-            <img
+            {/* <img
               src={img}
               alt='hero-img/img'
               className='w-auto h-[19vh] lg:h-[45vh] md:h-[35vh] sm:h-[31vh] xsm:h-[21vh] transitions-theme -rotate-[25deg] hover:rotate-0 cursor-pointer object-fill'
+            /> */}
+            <LazyLoadImage
+              src={img}
+              alt='hero-img/img'
+              className='w-auto h-[19vh] lg:h-[45vh] md:h-[35vh] sm:h-[31vh] xsm:h-[21vh] transitions-theme -rotate-[25deg] hover:rotate-0 cursor-pointer object-fill'
+              effect="opacity"
             />
           </div>
         </div>

@@ -1,9 +1,9 @@
 import React from 'react'
-import { ChevronDoubleLeftIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart, clearAllItems } from '../../store/CartSlice';
 
-const CartCount = ({ onCartToggle, totalQTY, onClearCartItems }) => {
+const CartCount = React.memo(() => {
     const dispatch = useDispatch()
     const cartQuantity = useSelector(state=>state.cart.cartTotalQantity)
     const closeCartHandler = () => {
@@ -31,6 +31,6 @@ const CartCount = ({ onCartToggle, totalQTY, onClearCartItems }) => {
       </div>
    </>
   )
-}
+})
 
 export default CartCount

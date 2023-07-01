@@ -3,10 +3,10 @@ import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { removeFromCart, increaseItemQTY, decreaseItemQTY } from "../../store/CartSlice";
 
-const CartItem = ({ item: { id, title, text, img, color, shadow, price, itemQuantity } }) => {
+const CartItem = React.memo(({ item: { id, title, text, img, color, shadow, price, itemQuantity } }) => {
   const dispatch = useDispatch()
   const removeItemHandler = () => {
-    dispatch(removeFromCart(id))
+    dispatch(removeFromCart({id,title}))
   }
 
   const increaseQTYHandler = () => {
@@ -15,7 +15,6 @@ const CartItem = ({ item: { id, title, text, img, color, shadow, price, itemQuan
   const decreaseQTYHandler = () => {
     dispatch(decreaseItemQTY(id))
   }
-
   return (
     <>
       <div className="flex items-center justify-between w-full px-5">
@@ -53,6 +52,6 @@ const CartItem = ({ item: { id, title, text, img, color, shadow, price, itemQuan
       </div>
     </>
   );
-};
+});
 
 export default CartItem;

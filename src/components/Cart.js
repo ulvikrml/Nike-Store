@@ -13,6 +13,7 @@ const Cart = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(calculateTotal())
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   },[cartItems, dispatch])
 
   return (

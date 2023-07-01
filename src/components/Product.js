@@ -2,31 +2,31 @@ import React from "react";
 import { StarIcon, ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { addToCart, toggleCart } from "../store/CartSlice";
 import { useDispatch } from "react-redux";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const Item = (props) => {
-  const {ifExists, id, color, shadow, title, text, img, rating, price} = props
+  const { ifExists, id, color, shadow, title, text, img, rating, price } = props
   const dispatch = useDispatch();
 
   const onAddToCart = () => {
     const item = { id, title, text, img, color, shadow, price };
-
     dispatch(addToCart(item));
   };
 
   const onCartToggle = () => {
     dispatch(toggleCart())
-}
+  }
   return (
     <>
       <div
-        className={`relative bg-gradient-to-b ${color} ${shadow} grid items-center ${
-          ifExists ? "justify-items-start" : "justify-items-center"
-        } rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full hover:scale-105`}
+        className={`relative bg-gradient-to-b ${color} ${shadow} grid items-center ${ifExists ? "justify-items-start" : "justify-items-center"
+          } rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full hover:scale-105`}
       >
         <div
-          className={`grid items-center ${
-            ifExists ? "justify-items-start" : "justify-items-center"
-          }`}
+          className={`grid items-center ${ifExists ? "justify-items-start" : "justify-items-center"
+            }`}
         >
           <h1 className="text-slate-200 text-base md:text-lg lg:text-xl font-medium filter drop-shadow">
             {title}
@@ -49,35 +49,33 @@ const Item = (props) => {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={()=> onAddToCart()}
+              onClick={() => onAddToCart()}
               type="button"
-              className="bg-white/90 blur-effect-theme button-theme p-0.5 shadow shadow-sky-200"  
+              className="bg-white/90 blur-effect-theme button-theme p-0.5 shadow shadow-sky-200"
             >
               <ShoppingBagIcon className="icon-style text-slate-900" />
             </button>
             <button
-              onClick={()=> {onAddToCart(); onCartToggle();}}
+              onClick={() => { onAddToCart(); onCartToggle(); }}
               type="button"
               className="bg-white/90 blur-effect-theme button-theme px-2 py-1 shadow shadow-sky-200 text-sm text-black"
-              
+
             >
-               Buy Now
+              Buy Now
             </button>
           </div>
         </div>
         <div
-          className={`flex items-center ${
-            ifExists ? "absolute top-5 right-1" : "justify-center"
-          }`}
+          className={`flex items-center ${ifExists ? "absolute top-5 right-1" : "justify-center"
+            }`}
         >
-          <img
+          <LazyLoadImage
             src={img}
             alt={title}
-            className={`transitions-theme hover:-rotate-12 ${
-              ifExists
-                ? "h-auto w-48 md:w-56 lg:w-64 -rotate-[35deg]"
-                : "h-36 w-64"
-            }`}
+            className={`hover:-rotate-12 cursor-pointer ${ifExists ? "h-auto w-48 md:w-56 lg:w-64 -rotate-[35deg]" : "h-36 w-64"
+              }`}
+            effect="blur"
+            style={{ transition: 'all 0.5s ease-in-out' }}
           />
         </div>
       </div>

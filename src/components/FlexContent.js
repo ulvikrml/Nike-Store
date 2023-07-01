@@ -1,4 +1,6 @@
 import React from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const FlexContent = ({ ifExists, endpoint: { title, heading, text, img, btn, url } }) => {
   return (
@@ -13,10 +15,15 @@ const FlexContent = ({ ifExists, endpoint: { title, heading, text, img, btn, url
           </a>
         </div>
         <div className='flex justify-center items-center max-w-xl relative lg:max-w-none w-full'>
-          <img
+          <LazyLoadImage
             src={img}
             alt={heading}
-            className={`w-auto object-fill transitions-theme ${ifExists ? 'h-40 lg:h-60 md:h-56 sm:h-52 xsm:h-44 rotate-6 hover:-rotate-12' : 'h-44 lg:h-72 md:h-64 sm:h-52 xsm:h-52 rotate-[19deg] hover:rotate-12'}`}
+            className={`w-auto object-fill cursor-pointer ${ifExists
+                ? 'h-40 lg:h-60 md:h-56 sm:h-52 xsm:h-44 rotate-6 hover:-rotate-12'
+                : 'h-44 lg:h-72 md:h-64 sm:h-52 xsm:h-52 rotate-[19deg] hover:rotate-12'
+              }`}
+            effect="blur"
+            style={{ transition: 'all 0.5s ease-in-out' }}
           />
         </div>
       </div>

@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+
 
 const initialState = {
     isCartOpen: false,
@@ -25,22 +27,21 @@ const cart = createSlice({
                 const cartItem = { ...action.payload, itemQuantity: 1 };
                 state.cartItems.push(cartItem);
             }
-            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+            toast.success(`${action.payload.title} added to Cart`);
+
         },
         removeFromCart: (state, action) => {
-            const editedCart = state.cartItems.filter(item => item.id !== action.payload);
-
+            const editedCart = state.cartItems.filter(item => item.id !== action.payload.id);
             state.cartItems = editedCart;
-            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+            toast.success(`${action.payload.title} Removed From Cart`);
         },
 
         increaseItemQTY: (state, action) => {
             const index = state.cartItems.findIndex((item) => item.id === action.payload);
-            console.log(index);
             if (index >= 0) {
                 state.cartItems[index].itemQuantity += 1;
+                toast.success(`Item QTY Increased`);
             }
-            localStorage.setItem("cart", JSON.stringify(state.cartItems));
         },
 
         decreaseItemQTY: (state, action) => {
@@ -48,12 +49,16 @@ const cart = createSlice({
 
             if (state.cartItems[index].itemQuantity > 1) {
                 state.cartItems[index].itemQuantity -= 1;
+                toast.success(`Item QTY Decreased`);
             }
-            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+            else {
+                const editedCart = state.cartItems.filter(item => item.id !== action.payload)
+                state.cartItems = editedCart;
+            }
         },
         clearAllItems: (state) => {
             state.cartItems = []
-            localStorage.setItem("cart", JSON.stringify(state.cartItems));
+            toast.success(`Cart Cleared`);
         },
         calculateTotal: (state) => {
             let { totalAmount, totalQTY } = state.cartItems.reduce((cartTotal, cartItem) => {

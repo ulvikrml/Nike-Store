@@ -6,7 +6,7 @@ const Footer = ({ footer: { titles, links } }) => {
    <>
       <footer className='bg-theme pt-7 pb-5 mt-12'>
         <div className='nike-container text-slate-200'>
-          <div className='grid items-start grid-cols-3 w-full gap-2 md:gap-1'>
+          <div className='grid items-start grid-cols-3 w-full lg:w-1/2 gap-2 md:gap-1 mx-auto'>
             {titles.map((val, i) => (
               <div key={i} className="grid items-center">
                 <h4 className='text-sm lg:text-lg md:text-base uppercase font-semibold'>{val.title}</h4>
