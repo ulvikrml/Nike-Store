@@ -11,6 +11,7 @@ You can access the live demo of the project here [Live Preview](https://nike-sto
   
 Additional package:
 * React-hot-toast
+* React-lazy-load-image-component
 
 
 ## Getting Started
